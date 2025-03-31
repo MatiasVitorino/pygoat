@@ -1,5 +1,7 @@
 name: Dependabot Auto-Merge
-on: pull_request
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 permissions:
   contents: write
@@ -8,14 +10,24 @@ permissions:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
+    # Aplica apenas a PRs do Dependabot e que passaram nos testes
     if: |
       github.actor == 'dependabot[bot]' &&
-      github.event.pull_request.title contains 'Bump'  # Filtra PRs do Dependabot:cite[4]:cite[7]
-      
+      github.event.pull_request.mergeable == true &&
+      github.event.pull_request.review_comments == 0  # Ignora PRs com comentários de revisão
+
     steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub CLI
+        run: |
+          gh auth login --with-token <<< "${{ secrets.AUTO_MERGE_TOKEN }}"
+
       - name: Habilitar Auto-Merge
         env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}  # Token com permissões para merge
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          gh pr merge --auto --merge "$PR_URL"
+          # Aprova o PR se necessário e faz merge automático
+          gh pr review $PR_NUMBER --approve
+          gh pr merge $PR_NUMBER --auto --merge --body "Automerged by Dependabot workflow"
