@@ -305,11 +305,11 @@ def cmd_lab(request):
             os=request.POST.get('os')
             print(os)
             if(os=='win'):
-                command="nslookup {}".format(domain)
+                command=["nslookup", domain]
             else:
-                command = "dig {}".format(domain)
+                command = ["dig", domain]
 
-            output=subprocess.check_output(command,shell=True,encoding="UTF-8");
+            output=subprocess.check_output(command, encoding="UTF-8");
             print(output)
             return render(request,'Lab/CMD/cmd_lab.html',{"output":output})
         else:
