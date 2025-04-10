@@ -5,8 +5,12 @@ updates:
     schedule:
       interval: "daily"       # Verifica atualizações diariamente
     open-pull-requests-limit: 10  # Limita PRs abertos para evitar sobrecarga:cite[3]:cite[6]
+    auto-merge: true
+    versioning-strategy: auto
 
   - package-ecosystem: "github-actions"  # Atualiza GitHub Actions
     directory: "/"
     schedule:
       interval: "weekly"
+    auto-merge: true
+    versioning-strategy: auto
