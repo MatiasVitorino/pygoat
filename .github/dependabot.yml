@@ -1,16 +1,18 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"  # Para dependências Python (requirements.txt, setup.py, etc.)
-    directory: "/"            # Diretório raiz do projeto
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
-      interval: "daily"       # Verifica atualizações diariamente
-    open-pull-requests-limit: 10  # Limita PRs abertos para evitar sobrecarga:cite[3]:cite[6]
-    auto-merge: true
-    versioning-strategy: auto
+      interval: "daily"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "pip"
 
-  - package-ecosystem: "github-actions"  # Atualiza GitHub Actions
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-    auto-merge: true
-    versioning-strategy: auto
+    labels:
+      - "dependencies"
+      - "github-actions"
