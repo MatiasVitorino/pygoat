@@ -10,5 +10,5 @@ django-heroku
 whitenoise
 django-allauth
 Jinja2==3.1.6
-python-etcd==0.4.1
+python-etcd==0.4.5
 urllib3==2.2.9
