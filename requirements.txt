@@ -3,7 +3,7 @@ Django==4.2.20
 pytz==2025.2
 sqlparse==0.5.3
 php-wsgi
-pyyaml==6.0.0
+pyyaml==6.0.1
 django-crispy-forms
 gunicorn
 django-heroku
