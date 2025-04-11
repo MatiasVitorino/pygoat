@@ -1,7 +1,7 @@
 asgiref==3.8.1
 Django==4.2.20
 pytz==2025.2
-sqlparse==0.4.3
+sqlparse==0.5.3
 php-wsgi
 pyyaml==6.0.0
 django-crispy-forms
